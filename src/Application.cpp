@@ -4,6 +4,7 @@ Application::Application() :
 myWindow(sf::VideoMode(800, 600), "Heightmap 3D Viewer")
 {
     myWindow.setVerticalSyncEnabled(true);
+    myRenderer.onResize(800, 600);
 }
 
 void Application::run()

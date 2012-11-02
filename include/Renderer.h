@@ -1,6 +1,9 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
+#include <Map.h>
+#include <loaders/SfmlLoader.h>
+
 class Renderer
 {
     public:
@@ -11,6 +14,7 @@ class Renderer
 
     private:
 
+        Map/*<SfmlLoader>*/ myMap;
         float myAngle;
 };
 

@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\loaders">
+      <UniqueIdentifier>{3eecfe37-fc0d-4997-a5c6-d61fcccef184}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\loaders">
+      <UniqueIdentifier>{19cb7de7-e21f-48b1-9bec-685bb47c5f93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\exceptions">
+      <UniqueIdentifier>{3f160f6c-8f3f-49aa-9c07-6ac49f59e088}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\exceptions">
+      <UniqueIdentifier>{d64ebadb-5901-4d51-8b29-61a46b14077c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -23,6 +35,18 @@
     </ClCompile>
     <ClCompile Include="src\Renderer.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Map.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\loaders\ILoader.cpp">
+      <Filter>Source Files\loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\loaders\SfmlLoader.cpp">
+      <Filter>Source Files\loaders</Filter>
+    </ClCompile>
+    <ClCompile Include="src\exceptions\LoadingException.cpp">
+      <Filter>Source Files\exceptions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -35,5 +59,25 @@
     <ClInclude Include="include\OpenGL.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\Map.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Vector3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\loaders\SfmlLoader.h">
+      <Filter>Header Files\loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="include\loaders\ILoader.h">
+      <Filter>Header Files\loaders</Filter>
+    </ClInclude>
+    <ClInclude Include="include\exceptions\LoadingException.h">
+      <Filter>Header Files\exceptions</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="include\Vector3.inl">
+      <Filter>Header Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

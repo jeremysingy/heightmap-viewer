@@ -15,6 +15,7 @@ class Application
 
         sf::Window myWindow;
         sf::Clock  myClock;
+        
         Renderer   myRenderer;
 };
 
