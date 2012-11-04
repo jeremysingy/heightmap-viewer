@@ -5,8 +5,6 @@
 #include <memory>
 #include <loaders/ILoader.h>
 
-//class ILoader;
-
 class Map
 {
     public:
