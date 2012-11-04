@@ -1,9 +1,6 @@
 #ifndef VECTOR3_H
 #define VECTOR3_H
 
-#include <SFML/Graphics.hpp>
-#include <Renderer.h>
-
 template <typename T>
 class Vector3
 {

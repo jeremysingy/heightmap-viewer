@@ -3,8 +3,9 @@
 
 #include <string>
 #include <memory>
+#include <loaders/ILoader.h>
 
-class ILoader;
+//class ILoader;
 
 class Map
 {

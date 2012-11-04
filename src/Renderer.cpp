@@ -1,11 +1,14 @@
 #include <Renderer.h>
 #include <OpenGL.h>
+#include <SFML/Window/Keyboard.hpp>
 
 #include <iostream>
 
+const float Renderer::CAM_SPEED = 0.02f;
+const float Renderer::CAM_ROT_FACTOR = 0.15f;
+
 Renderer::Renderer() :
-myMap("resources/heightmap.png"),
-myAngle(0.f)
+myMap("resources/heightmap.png")
 {
     glClearColor(0.f, 0.f, 0.f, 0.f);
     glClearDepth(1.0);
@@ -17,44 +20,39 @@ myAngle(0.f)
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
-    gluPerspective(45.0, 800.0f / 600.0f, 1.0, 100.0);
+    gluPerspective(45.0, 800.0 / 600.0, 0.1, 100.0);
 
     // TODO make the mode change possible at runtime
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 }
 
-void Renderer::drawScene(int time)
+void Renderer::updateScene(int time, sf::Vector2i& mouseDelta)
 {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    //gluLookAt(0.0, 0.0, -50.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
-    gluLookAt(-10.0, 2.0, -10.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+    sf::Vector3f camSpeed = sf::Vector3f();
 
-    // Rotation
-    /*myAngle += 0.05f * time;
-    if(myAngle >= 360.f)
-        myAngle = 0.f;
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+        camSpeed.z = CAM_SPEED;
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+        camSpeed.z = -CAM_SPEED;
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+        camSpeed.x = CAM_SPEED;
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+        camSpeed.x = -CAM_SPEED;
 
-    glRotatef(myAngle, 1.0f, 0.0f, 0.0f);
-    glRotatef(myAngle * 2, 0.0f, 0.0f, 1.0f);*/
+    myCamera.move(camSpeed, time);
+    myCamera.rotate(mouseDelta.x * CAM_ROT_FACTOR, mouseDelta.y * CAM_ROT_FACTOR);
+    myCamera.place();
+}
 
-    glBegin(GL_LINES);
-        glColor3f(1.f, 0.f, 0.f);
-        glVertex3f(0.f, 0.f, 0.f);
-        glVertex3f(10.f, 0.f, 0.f);
+void Renderer::drawScene()
+{
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        glColor3f(0.f, 1.f, 0.f);
-        glVertex3f(0.f, 0.f, 0.f);
-        glVertex3f(0.f, 10.f, 0.f);
-        
-        glColor3f(0.f, 0.f, 1.f);
-        glVertex3f(0.f, 0.f, 0.f);
-        glVertex3f(0.f, 0.f, 10.f);
-    glEnd();
-    
-    glColor3f(1.f, 1.f, 1.f);
+    // Draw the axes
+    drawAxes();
     
     // Draw the map
     glScalef(0.1f, 0.1f, 0.1f);
@@ -71,4 +69,23 @@ void Renderer::onResize(unsigned int width, unsigned int height)
     gluPerspective(45.0, width / static_cast<float>(height), 1.0, 100.0);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
+}
+
+void Renderer::drawAxes()
+{
+    glBegin(GL_LINES);
+        glColor3f(1.f, 0.f, 0.f);
+        glVertex3f(0.f, 0.f, 0.f);
+        glVertex3f(10.f, 0.f, 0.f);
+
+        glColor3f(0.f, 1.f, 0.f);
+        glVertex3f(0.f, 0.f, 0.f);
+        glVertex3f(0.f, 10.f, 0.f);
+        
+        glColor3f(0.f, 0.f, 1.f);
+        glVertex3f(0.f, 0.f, 0.f);
+        glVertex3f(0.f, 0.f, 10.f);
+
+        glColor3f(1.f, 1.f, 1.f);
+    glEnd();
 }

@@ -31,11 +31,14 @@ void Map::compile()
             // vertex3(myPrecision + x, getPixel(myPrecision + x, myPrecision + z), myPrecision + z, (x + myPrecision) / getWidth(), 1.f - ((z + myPrecision) / getHeight()) );
             // vertex4(x, getPixel(x, myPrecision + z), myPrecision + z, x / static_cast<float>(getWidth()), 1.f - ((z + myPrecision) / getHeight()) );
             
+            float xVal = static_cast<float>(x);
+            float zVal = static_cast<float>(z);
+
             // Vertex coordinates
-            Vector3f v1(x, myLoader->valueAt(x, z) * myHeightFactor, z);
-            Vector3f v2(myPrecision + x, myLoader->valueAt(myPrecision + x, z) * myHeightFactor, z);
-            Vector3f v3(myPrecision + x, myLoader->valueAt(myPrecision + x, myPrecision + z) * myHeightFactor, myPrecision + z);
-            Vector3f v4(x, myLoader->valueAt(x, myPrecision + z) * myHeightFactor, myPrecision + z);
+            Vector3f v1(xVal, myLoader->valueAt(x, z) * myHeightFactor, zVal);
+            Vector3f v2(myPrecision + xVal, myLoader->valueAt(myPrecision + x, z) * myHeightFactor, zVal);
+            Vector3f v3(myPrecision + xVal, myLoader->valueAt(myPrecision + x, myPrecision + z) * myHeightFactor, myPrecision + zVal);
+            Vector3f v4(xVal, myLoader->valueAt(x, myPrecision + z) * myHeightFactor, myPrecision + zVal);
 
             // First triangle
             glVertex3f(v3.X, v3.Y, v3.Z);

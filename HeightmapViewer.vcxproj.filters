@@ -48,6 +48,9 @@
     <ClCompile Include="src\exceptions\LoadingException.cpp">
       <Filter>Source Files\exceptions</Filter>
     </ClCompile>
+    <ClCompile Include="src\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Application.h">
@@ -73,6 +76,9 @@
     </ClInclude>
     <ClInclude Include="include\exceptions\LoadingException.h">
       <Filter>Header Files\exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Camera.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
