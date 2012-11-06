@@ -8,22 +8,27 @@ const float Renderer::CAM_SPEED = 0.02f;
 const float Renderer::CAM_ROT_FACTOR = 0.15f;
 
 Renderer::Renderer() :
-myMap("resources/heightmap.png")
+myMap("resources/heightmap.png", "resources/texture.png")
 {
-    glClearColor(0.f, 0.f, 0.f, 0.f);
+    glShadeModel(GL_SMOOTH);
+
+    glClearColor(0.f, 0.f, 0.f, 1.f);
     glClearDepth(1.0);
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
     glEnable(GL_DEPTH_TEST);
 
-    glViewport(0, 0, 800, 600);
+    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
+    glViewport(0, 0, 800, 600); // TODO magic numbers
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
-    gluPerspective(45.0, 800.0 / 600.0, 0.1, 100.0);
-
     // TODO make the mode change possible at runtime
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+    onResize(800, 600);
 }
 
 void Renderer::updateScene(int time, sf::Vector2i& mouseDelta)
@@ -63,10 +68,11 @@ void Renderer::drawScene()
 void Renderer::onResize(unsigned int width, unsigned int height)
 {
     glViewport(0, 0, width, height);
+    
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-
-    gluPerspective(45.0, width / static_cast<float>(height), 1.0, 100.0);
+    gluPerspective(45.0, width / static_cast<float>(height), 0.1, 100.0);
+    
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 }
